@@ -36,11 +36,8 @@ public class PhoneCompany {
         System.out.println(QUERY_NEW_CUSTOMER);
         String newCustomerInput = scanner.nextLine();
 
-        boolean isNewCustomer =
-            newCustomerInput.equalsIgnoreCase("yes") ||
-            newCustomerInput.equalsIgnoreCase("y");
         DecimalFormat format = new DecimalFormat("#.##");
-        double costs = phoneCompany.calculateCost(plan, minutes, isNewCustomer);
+        double costs = phoneCompany.calculateCost(plan, minutes, phoneCompany.isNewCustomer(newCustomerInput));
         System.out.println("This plan will cost you an estimated " + format.format(costs) + "€ each month.");
     }
 
@@ -121,5 +118,15 @@ public class PhoneCompany {
         }
 
         return cost;
+    }
+
+    /**
+     * Check if the customer is new
+     *
+     * @param newCustomerInput the user input for whether the customer is new
+     * @return whether the customer is new
+     */
+    private boolean isNewCustomer(String newCustomerInput) {
+        return newCustomerInput.equalsIgnoreCase("yes") || newCustomerInput.equalsIgnoreCase("y");
     }
 }
